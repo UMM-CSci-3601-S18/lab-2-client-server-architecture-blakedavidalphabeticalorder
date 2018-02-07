@@ -60,12 +60,20 @@ we'll just refer to this as the `public` folder.
 
 :question: *1* What is the purpose of `.gitignore`?
 
+:answer: *1* .gitignore allows ignoring of files we want to keep from committing to our repository
+
 :question: *2* What role is Gradle playing in the
 project, and what is the purpose of `build.gradle`?
 
+:answer: *2* Helps automate the build process of our server. build.gradle tells project to use gradle framework
+
 :question: *3* What is the purpose of Travis-CI?
 
+:answer: *3* Travis CI provides continuous integration for our git broject
+
 :question: *4* Explain what a _route_ is.
+
+:answer: *4* A route is a URL path
 
 :question: *5* What is the purpose of `umm3601.Server` class?
 What is the purpose of the `umm3601.user.UserController` class?
@@ -76,14 +84,36 @@ following URLs:
 - :question: The page `api/users?age=25`
 - :question: The page `api/users/588935f5de613130e931ffd5`
 
+:answer: *5* umm3601.server gets all user data from users.json, builds a 'website' out of a domain named public 
+on port 4567, and lays out a 'map' of avoidable pages. Allows for use of apis and getting specific data using 
+url 'tags', and also employs error handling
+
+UserController gets the database of users, and adds methods for getting user data, singular or multiple users.
+
+The page users prompts the user to input desired age or gets all users, and returns results of action.
+
+The page api/users gives access to 'raw' json structure of user data.
+
+api/users?age=25 returns the specific 'search' in that parameter; everyone in the database whose age is 25.
+
+api/users/588935f5de613130e931ffd5 returns the specific user with the given id
+
 :question: *6* What are the contents of the `public` folder? What is the purpose of each of the HTML files there?
+
+:answer: *6* Public folder is our website. It contains HTML, Javascript, and CSS used for the website. Each HTML file is a different URL path.
 
 :question: *7* Describe what happens when you filter users by
 age in the client? What is read from the web page, and what
 request is sent to the server? What is received, and how/where
 is it displayed?
 
+:answer: *7* When an existing age is given the raw json is returned. When a nonexistent age is given you receive a blank Json template. 
+Website listens for a button, the request is to get users by age, and raw json is returned on the website.
+
 :question: *8* Where is the client-side JavaScript defined? Name the file(s) in which it is used.
+
+:answer: *8* The client-side Javascript is defined in /javascript/users.js and is used in users.html
+
 
 ## Use ZenHub to support Agile development
 
