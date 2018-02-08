@@ -5,6 +5,7 @@ import spark.Request;
 import spark.Response;
 import umm3601.user.Database;
 import umm3601.user.UserController;
+import umm3601.user.TodoController;
 
 import java.io.IOException;
 
@@ -14,12 +15,15 @@ import static spark.debug.DebugScreen.*;
 public class Server {
 
   public static final String USER_DATA_FILE = "src/main/data/users.json";
+  public static final String TODO_DATA_FILE = "src/main/data/todos.json";
   private static Database userDatabase;
+  private static Database todoDatabase;
 
   public static void main(String[] args) {
 
     // Initialize dependencies
     UserController userController = buildUserController();
+    TodoController todoController = buildTodoController();
 
     // Configure Spark
     port(4567);
@@ -44,7 +48,7 @@ public class Server {
     get("api/users", userController::getUsers);
 
     // List todos, filtered using query parameters
-    get("api/todos", userController::getTodos);
+    get("api/todos", todoController::getTodos);
 
 
     // An example of throwing an unhandled exception so you can see how the
@@ -87,6 +91,25 @@ public class Server {
     }
 
     return userController;
+  }
+
+  //Start of TodoController
+  private static TodoController buildTodoController() {
+    TodoController todoController = null;
+
+    try {
+      todoDatabase = new Database(TODO_DATA_FILE);
+      todoController = new TodoController(todoDatabase);
+    } catch (IOException e) {
+      System.err.println("The server failed to load the user data; shutting down.");
+      e.printStackTrace(System.err);
+
+      // Shut the server down
+      stop();
+      System.exit(1);
+    }
+
+    return todoController;
   }
 
   // Enable GZIP for all responses
