@@ -64,4 +64,10 @@ public class UserController {
     return buildSuccessJsonResponse("users", gson.toJsonTree(users));
   }
 
+  public JsonObject getTodos(Request req, Response res) {
+    res.type("application/json");
+    User[] users = database.listUsers(req.queryMap().toMap());
+    return buildSuccessJsonResponse("todos", gson.toJsonTree(users));
+  }
+
 }
