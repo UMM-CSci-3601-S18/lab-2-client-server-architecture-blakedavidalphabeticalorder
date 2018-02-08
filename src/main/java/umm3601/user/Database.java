@@ -23,7 +23,11 @@ public class Database {
   public Database(String userDataFile) throws IOException {
     Gson gson = new Gson();
     FileReader reader = new FileReader(userDataFile);
-    allUsers = gson.fromJson(reader, User[].class);
+    if (userDataFile.equals("src/main/data/users.json")){
+      allUsers = gson.fromJson(reader, User[].class);
+    }else if(userDataFile.equals("src/main/data/todos.json")){
+      allTodos = gson.fromJson(reader, Todo[].class);
+    }
   }
 
   /**
