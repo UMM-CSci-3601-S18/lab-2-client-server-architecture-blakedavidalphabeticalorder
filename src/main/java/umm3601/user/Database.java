@@ -42,6 +42,9 @@ public class Database {
     return Arrays.stream(allUsers).filter(x -> x._id.equals(id)).findFirst().orElse(null);
   }
 
+  public Todo getTodo(String id) {
+    return Arrays.stream(allTodos).filter(x -> x._id.equals(id)).findFirst().orElse(null);
+  }
   /**
    * Get an array of all the users satisfying the queries in the params.
    *
@@ -66,6 +69,10 @@ public class Database {
     Todo[] filteredTodos = allTodos;
 
     // Process other query parameters here...
+    if(queryParams.containsKey("id")) {
+      String targetID = (queryParams.get("id")[0]);
+      filteredTodos = filterTodosByID(filteredTodos, targetID);
+    }
 
     return filteredTodos;
   }
@@ -81,4 +88,7 @@ public class Database {
     return Arrays.stream(users).filter(x -> x.age == targetAge).toArray(User[]::new);
   }
 
+  public Todo[] filterTodosByID(Todo[] todos, String targetID){
+    return Arrays.stream(todos).filter(x -> x._id == targetID).toArray(Todo[]::new);
+  }
 }
