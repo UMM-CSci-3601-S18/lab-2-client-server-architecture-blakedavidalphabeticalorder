@@ -18,6 +18,7 @@ import java.util.Map;
 public class Database {
 
   private User[] allUsers;
+  private Todo[] allTodos;
 
   public Database(String userDataFile) throws IOException {
     Gson gson = new Gson();
@@ -56,6 +57,14 @@ public class Database {
     return filteredUsers;
   }
 
+  //Will list all Todos
+  public Todo[] listTodos(Map<String, String[]> queryParams) {
+    Todo[] filteredTodos = allTodos;
+
+    // Process other query parameters here...
+
+    return filteredTodos;
+  }
   /**
    * Get an array of all the users having the target age.
    *
