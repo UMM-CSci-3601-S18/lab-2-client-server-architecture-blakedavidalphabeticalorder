@@ -33,6 +33,8 @@ public class Server {
     // Redirects to create simpler URLs
     redirect.get("/about", "/about.html");
     redirect.get("/users", "/users.html");
+    redirect.get("/todo", "/todo.html");
+
 
     // API endpoints
 
