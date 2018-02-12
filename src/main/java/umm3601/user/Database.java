@@ -68,10 +68,18 @@ public class Database {
   public Todo[] listTodos(Map<String, String[]> queryParams) {
     Todo[] filteredTodos = allTodos;
 
-    // Process other query parameters here...
+    // Return Todos with specific id
     if(queryParams.containsKey("id")) {
       String targetID = (queryParams.get("id")[0]);
       filteredTodos = filterTodosByID(filteredTodos, targetID);
+    }
+
+    // Apply a limit to the number of responses to the search
+    if(queryParams.containsKey("limit"))
+    {
+      int maxResponses = queryParams.get("limit")[0]);
+      filteredTodos = limitTodos(filteredTodos, maxResponses);
+
     }
 
     return filteredTodos;
@@ -90,5 +98,18 @@ public class Database {
 
   public Todo[] filterTodosByID(Todo[] todos, String targetID){
     return Arrays.stream(todos).filter(x -> x._id == targetID).toArray(Todo[]::new);
+  }
+
+  //WIP
+  public Todo[] limitTodos(Todo[] todos, int maxResponses)
+  {
+    if(todos.length > maxResponses)
+    {
+      return Arrays.stream(todos).limit(maxResponses).toArray(Todo[]::new);
+    }
+    else
+    {
+      return todos;
+    }
   }
 }
