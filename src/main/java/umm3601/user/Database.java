@@ -5,7 +5,6 @@ import com.google.gson.Gson;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Map;
 
 /**
@@ -24,48 +23,15 @@ public class Database {
   public Database(String userDataFile) throws IOException {
     Gson gson = new Gson();
     FileReader reader = new FileReader(userDataFile);
-    if (userDataFile.equals("src/main/data/users.json")){
-      allUsers = gson.fromJson(reader, User[].class);
-    }else if(userDataFile.equals("src/main/data/todos.json")){
-      allTodos = gson.fromJson(reader, Todo[].class);
-    }
+    allTodos = gson.fromJson(reader, Todo[].class);
   }
 
-  /**
-   * Get the single user specified by the given ID. Return
-   * `null` if there is no user with that ID.
-   *
-   * @param id the ID of the desired user
-   * @return the user with the given ID, or null if there is no user
-   * with that ID
-   */
-  public User getUser(String id) {
-    return Arrays.stream(allUsers).filter(x -> x._id.equals(id)).findFirst().orElse(null);
-  }
-
+  //Grabs specific Todos id.
   public Todo getTodo(String id) {
     return Arrays.stream(allTodos).filter(x -> x._id.equals(id)).findFirst().orElse(null);
   }
-  /**
-   * Get an array of all the users satisfying the queries in the params.
-   *
-   * @param queryParams map of required key-value pairs for the query
-   * @return an array of all the users matching the given criteria
-   */
-  public User[] listUsers(Map<String, String[]> queryParams) {
-    User[] filteredUsers = allUsers;
 
-    // Filter age if defined
-    if(queryParams.containsKey("age")) {
-      int targetAge = Integer.parseInt(queryParams.get("age")[0]);
-      filteredUsers = filterUsersByAge(filteredUsers, targetAge);
-    }
-    // Process other query parameters here...
-
-    return filteredUsers;
-  }
-
-  //Will list all Todos
+  //Will list all Todos, allows for extra parameters
   public Todo[] listTodos(Map<String, String[]> queryParams) {
     Todo[] filteredTodos = allTodos;
 
@@ -94,7 +60,7 @@ public class Database {
       else if(targetStatus.equals("incomplete")) filteredTodos = filteredTodosByStatus(filteredTodos, false);
     }
 
-    //Return Todos by string in body
+    //Return Todos with specified string in its body.
     if (queryParams.containsKey("contains")){
       String targetBody = (queryParams.get("contains")[0]);
       filteredTodos = filteredTodosByBody(filteredTodos, targetBody);
@@ -121,17 +87,6 @@ public class Database {
     }
 
     return filteredTodos;
-  }
-  /**
-   * Get an array of all the users having the target age.
-   *
-   * @param users the list of users to filter by age
-   * @param targetAge the target age to look for
-   * @return an array of all the users from the given list that have
-   * the target age
-   */
-  public User[] filterUsersByAge(User[] users, int targetAge) {
-    return Arrays.stream(users).filter(x -> x.age == targetAge).toArray(User[]::new);
   }
 
   public Todo[] filterTodosByID(Todo[] todos, String targetID){
