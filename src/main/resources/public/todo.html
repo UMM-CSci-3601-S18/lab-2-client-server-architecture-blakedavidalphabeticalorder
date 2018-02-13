@@ -24,6 +24,9 @@ owner: <input id="owner" type= "text" name="owner">
 
 category: <input id="category" type= "text" name="category">
 <button type="button" id="getTodosByCategory"> get todos by category </button>
+
+status: <input id="status" type= "text" name="status">
+<button type="button" id="getTodosByStatus"> get todos by status </button>
 <script>
   window.onload = function() {
     console.log("The page is loaded now!");
@@ -42,6 +45,9 @@ category: <input id="category" type= "text" name="category">
 
     element = document.getElementById('getTodosByCategory');
     element.addEventListener("click", getAllTodosByCategory, true);
+
+    element = document.getElementById('getTodosByStatus');
+    element.addEventListener("click", getAllTodosByStatus, true);
   }
 </script>
 </body>
