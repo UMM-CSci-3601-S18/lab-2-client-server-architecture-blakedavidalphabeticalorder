@@ -85,8 +85,13 @@ public class Database {
 
     //Return Todos by status
     if (queryParams.containsKey("status")){
-      boolean targetStatus = Boolean.valueOf(queryParams.get("status")[0]);
-      filteredTodos = filteredTodosByStatus(filteredTodos, targetStatus);
+
+      /**This method is done a little funky because we original had it parse from a boolean statement
+       * where the input looked like ?status=true. Now it is more inline with the example of ?status=complete
+      */
+      String targetStatus = queryParams.get("status")[0].toLowerCase();
+      if(targetStatus.equals("complete")) filteredTodos = filteredTodosByStatus(filteredTodos, true);
+      else if(targetStatus.equals("incomplete")) filteredTodos = filteredTodosByStatus(filteredTodos, false);
     }
 
     //Return Todos by string in body
