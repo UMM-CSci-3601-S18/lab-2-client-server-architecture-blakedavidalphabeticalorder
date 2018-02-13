@@ -5,7 +5,7 @@
 /**
  * Function to get all the todos!
  */
-function getAllTodo() {
+function getAllTodos() {
   console.log("Getting all the todos.");
 
   var HttpThingy = new HttpClient();
@@ -14,15 +14,41 @@ function getAllTodo() {
   });
 }
 
-function getAllUsersByAge() {
-  console.log("Getting all the users.");
+function getAllTodosByID() {
+  console.log("Getting all the todos.");
 
   var HttpThingy = new HttpClient();
-  HttpThingy.get("/api/users?age=" +  document.getElementById("age").value, function(returned_json){
+  HttpThingy.get("/api/todos/" +  document.getElementById("_id").value, function(returned_json){
     document.getElementById('jsonDump').innerHTML = returned_json;
   });
 }
 
+function getAllTodosByContains() {
+  console.log("Getting all the todos.");
+
+  var HttpThingy = new HttpClient();
+  HttpThingy.get("/api/todos?contains=" +  document.getElementById("contains").value, function(returned_json){
+    document.getElementById('jsonDump').innerHTML = returned_json;
+  });
+}
+
+function getAllTodosByOwner() {
+  console.log("Getting all the todos.");
+
+  var HttpThingy = new HttpClient();
+  HttpThingy.get("/api/todos?owner=" +  document.getElementById("owner").value, function(returned_json){
+    document.getElementById('jsonDump').innerHTML = returned_json;
+  });
+}
+
+function getAllTodosByCategory() {
+  console.log("Getting all the todos.");
+
+  var HttpThingy = new HttpClient();
+  HttpThingy.get("/api/todos?category=" +  document.getElementById("category").value, function(returned_json){
+    document.getElementById('jsonDump').innerHTML = returned_json;
+  });
+}
 /**
  * Wrapper to make generating http requests easier. Should maybe be moved
  * somewhere else in the future!.

@@ -13,18 +13,35 @@
 
 <div id="jsonDump" style="margin-top:20px"> Json will go here </div>
 
-age: <input id="age" type= "text" name="age">
-<button type="button" id="getUsersByAge"> get users by age </button>
+id: <input id="_id" type= "text" name="_id">
+<button type="button" id="getTodosByID"> get todos by id </button>
 
+contains: <input id="contains" type= "text" name="contains">
+<button type="button" id="getTodosByContains"> get todos by contains </button>
+
+owner: <input id="owner" type= "text" name="owner">
+<button type="button" id="getTodosByOwner"> get todos by owner </button>
+
+category: <input id="category" type= "text" name="category">
+<button type="button" id="getTodosByCategory"> get todos by category </button>
 <script>
   window.onload = function() {
     console.log("The page is loaded now!");
 
     var element = document.getElementById('getAll');
-    element.addEventListener("click", getAllTodo, true);
+    element.addEventListener("click", getAllTodos, true);
 
-    element = document.getElementById('getUsersByAge');
-    element.addEventListener("click", getAllUsersByAge, true);
+    element = document.getElementById('getTodosByID');
+    element.addEventListener("click", getAllTodosByID, true);
+
+    element = document.getElementById('getTodosByContains');
+    element.addEventListener("click", getAllTodosByContains, true);
+
+    element = document.getElementById('getTodosByOwner');
+    element.addEventListener("click", getAllTodosByOwner, true);
+
+    element = document.getElementById('getTodosByCategory');
+    element.addEventListener("click", getAllTodosByCategory, true);
   }
 </script>
 </body>

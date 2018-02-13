@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 import static junit.framework.TestCase.assertEquals;
 
@@ -18,5 +19,18 @@ public class FilterTodosByOwnerFromDB {
 
     Todo[] ownerBlanche = db.filterTodosByOwner(allTodos, "Blanche");
     assertEquals("Incorrect number of entries with owner Blanche", 43, ownerBlanche.length);
+  }
+    @Test
+    public void listTodosWithOwnerFilter() throws IOException {
+      Database db = new Database("src/main/data/todos.json");
+      Map<String, String[]> queryParams = new HashMap<>();
+
+      queryParams.put("owner", new String[] {"Fry"});
+      Todo[] ownerFry = db.listTodos(queryParams);
+      assertEquals("Incorrect number of entries with owner Fry", 61, ownerFry.length);
+
+      queryParams.put("owner", new String[] {"Blanche"});
+      Todo[] ownerBlanche = db.listTodos(queryParams);
+      assertEquals("Incorrect number of entries with owner Blanche", 43, ownerBlanche.length);
   }
 }
