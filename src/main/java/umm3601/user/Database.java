@@ -85,7 +85,15 @@ public class Database {
     //Return Todos by status
     if (queryParams.containsKey("status")){
       boolean targetStatus = Boolean.valueOf(queryParams.get("status")[0]);
+      //Need to add capitalization fix
+      //targetOwner.charAt(0);
       filteredTodos = filteredTodosByStatus(filteredTodos, targetStatus);
+    }
+
+    //Return Todos by string in body
+    if (queryParams.containsKey("contains")){
+      String targetBody = (queryParams.get("contains")[0]);
+      filteredTodos = filteredTodosByBody(filteredTodos, targetBody);
     }
 
     // Apply a limit to the number of responses to the search
@@ -116,6 +124,9 @@ public class Database {
   }
   public Todo[] filteredTodosByStatus(Todo[] todos, boolean targetStatus){
     return Arrays.stream(todos).filter(x -> x.status == targetStatus).toArray(Todo[]::new);
+  }
+  public Todo[] filteredTodosByBody(Todo[] todos, String targetBody){
+    return Arrays.stream(todos).filter(x -> x.body.contains(targetBody)).toArray(Todo[]::new);
   }
 
   public Todo[] limitTodos(Todo[] todos, int maxResponses)
