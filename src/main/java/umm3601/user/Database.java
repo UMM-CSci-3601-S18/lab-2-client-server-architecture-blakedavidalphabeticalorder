@@ -82,6 +82,12 @@ public class Database {
       filteredTodos = filterTodosByOwner(filteredTodos, targetOwner);
     }
 
+    //Return Todos by status
+    if (queryParams.containsKey("status")){
+      boolean targetStatus = Boolean.valueOf(queryParams.get("status")[0]);
+      filteredTodos = filteredTodosByStatus(filteredTodos, targetStatus);
+    }
+
     // Apply a limit to the number of responses to the search
     if(queryParams.containsKey("limit"))
     {
@@ -107,6 +113,9 @@ public class Database {
   }
   public Todo[] filterTodosByOwner(Todo[] todos, String targetOwner){
     return Arrays.stream(todos).filter(x -> x.owner.equals(targetOwner)).toArray(Todo[]::new);
+  }
+  public Todo[] filteredTodosByStatus(Todo[] todos, boolean targetStatus){
+    return Arrays.stream(todos).filter(x -> x.status == targetStatus).toArray(Todo[]::new);
   }
 
   public Todo[] limitTodos(Todo[] todos, int maxResponses)
