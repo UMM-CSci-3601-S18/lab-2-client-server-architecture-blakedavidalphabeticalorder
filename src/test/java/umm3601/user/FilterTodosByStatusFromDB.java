@@ -26,11 +26,11 @@ public class FilterTodosByStatusFromDB {
     Database db = new Database("src/main/data/todos.json");
     Map<String, String[]> queryParams = new HashMap<>();
 
-    queryParams.put("status", new String[] {"true"});
+    queryParams.put("status", new String[] {"complete"});
     Todo[] statusTrue = db.listTodos(queryParams);
     assertEquals("Incorrect number of entries with status true", 143, statusTrue.length);
 
-    queryParams.put("status", new String[] {"false"});
+    queryParams.put("status", new String[] {"incomplete"});
     Todo[] statusFalse = db.listTodos(queryParams);
     assertEquals("Incorrect number of entries with status false", 157, statusFalse.length);
   }
