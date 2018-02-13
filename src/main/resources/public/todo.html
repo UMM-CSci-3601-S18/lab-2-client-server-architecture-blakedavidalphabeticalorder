@@ -27,6 +27,9 @@ category: <input id="category" type= "text" name="category">
 
 status: <input id="status" type= "text" name="status">
 <button type="button" id="getTodosByStatus"> get todos by status </button>
+
+limit: <input id="limit" type= "text" name="limit">
+<button type="button" id="getTodosByLimit"> set limit of todos </button>
 <script>
   window.onload = function() {
     console.log("The page is loaded now!");
@@ -48,6 +51,9 @@ status: <input id="status" type= "text" name="status">
 
     element = document.getElementById('getTodosByStatus');
     element.addEventListener("click", getAllTodosByStatus, true);
+
+    element = document.getElementById('getTodosByLimit');
+    element.addEventListener("click", getAllTodosByLimit, true);
   }
 </script>
 </body>
