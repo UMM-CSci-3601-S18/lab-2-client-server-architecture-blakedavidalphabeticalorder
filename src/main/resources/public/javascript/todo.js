@@ -15,7 +15,7 @@ function getAllTodos() {
 }
 
 function getAllTodosByID() {
-  console.log("Getting all the users.");
+  console.log("Getting all the todos.");
 
   var HttpThingy = new HttpClient();
   HttpThingy.get("/api/todos/" +  document.getElementById("_id").value, function(returned_json){
@@ -23,6 +23,14 @@ function getAllTodosByID() {
   });
 }
 
+function getAllTodosByContains() {
+  console.log("Getting all the todos.");
+
+  var HttpThingy = new HttpClient();
+  HttpThingy.get("/api/todos?contains=" +  document.getElementById("contains").value, function(returned_json){
+    document.getElementById('jsonDump').innerHTML = returned_json;
+  });
+}
 /**
  * Wrapper to make generating http requests easier. Should maybe be moved
  * somewhere else in the future!.
