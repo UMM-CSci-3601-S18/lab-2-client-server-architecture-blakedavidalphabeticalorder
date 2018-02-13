@@ -5,7 +5,7 @@
 /**
  * Function to get all the todos!
  */
-function getAllTodo() {
+function getAllTodos() {
   console.log("Getting all the todos.");
 
   var HttpThingy = new HttpClient();
@@ -14,11 +14,11 @@ function getAllTodo() {
   });
 }
 
-function getAllUsersByAge() {
+function getAllTodosByID() {
   console.log("Getting all the users.");
 
   var HttpThingy = new HttpClient();
-  HttpThingy.get("/api/users?age=" +  document.getElementById("age").value, function(returned_json){
+  HttpThingy.get("/api/todos/" +  document.getElementById("_id").value, function(returned_json){
     document.getElementById('jsonDump').innerHTML = returned_json;
   });
 }
