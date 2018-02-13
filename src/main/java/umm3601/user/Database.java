@@ -77,9 +77,8 @@ public class Database {
     // Apply a limit to the number of responses to the search
     if(queryParams.containsKey("limit"))
     {
-      int maxResponses = queryParams.get("limit")[0]);
+      int maxResponses = Integer.parseInt(queryParams.get("limit")[0]);
       filteredTodos = limitTodos(filteredTodos, maxResponses);
-
     }
 
     return filteredTodos;
