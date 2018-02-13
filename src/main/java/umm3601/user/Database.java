@@ -78,16 +78,14 @@ public class Database {
     //Return Todos with specific owner
     if (queryParams.containsKey("owner")){
       String targetOwner = (queryParams.get("owner")[0]);
-      //Need to add capitalization fix
-      //targetOwner.charAt(0);
+      //Ensures the first letter is always capitalized.
+      targetOwner = targetOwner.substring(0, 1).toUpperCase() + targetOwner.substring(1);
       filteredTodos = filterTodosByOwner(filteredTodos, targetOwner);
     }
 
     //Return Todos by status
     if (queryParams.containsKey("status")){
       boolean targetStatus = Boolean.valueOf(queryParams.get("status")[0]);
-      //Need to add capitalization fix
-      //targetOwner.charAt(0);
       filteredTodos = filteredTodosByStatus(filteredTodos, targetStatus);
     }
 
