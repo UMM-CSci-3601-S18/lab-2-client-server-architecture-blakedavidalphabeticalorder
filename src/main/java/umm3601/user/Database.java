@@ -108,13 +108,14 @@ public class Database {
       int maxResponses = Integer.parseInt(queryParams.get("limit")[0]);
       filteredTodos = limitTodos(filteredTodos, maxResponses);
     }
-
+/*
     // Return Todos alphabetically
     if (queryParams.containsKey("orderBy"))
     {
       String targetOrderBy = (queryParams.get("orderBy")[0]);
       filteredTodos = filteredTodosByOrder(filteredTodos, targetOrderBy);
     }
+    */
     return filteredTodos;
   }
   /**
@@ -144,6 +145,7 @@ public class Database {
   public Todo[] filteredTodosByCategory(Todo[] todos, String targetCategory){
     return Arrays.stream(todos).filter(x -> x.category.equals(targetCategory)).toArray(Todo[]::new);
   }
+  /*
   public Todo[] filteredTodosByOrder(Todo[] todos, String targetOrderBy){
     switch (targetOrderBy){
       case "boolean":
@@ -151,6 +153,7 @@ public class Database {
         break;
     }
   }
+  */
   public Todo[] limitTodos(Todo[] todos, int maxResponses)
   {
     if(todos.length > maxResponses)
