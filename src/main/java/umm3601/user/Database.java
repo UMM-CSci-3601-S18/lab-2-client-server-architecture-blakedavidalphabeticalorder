@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Map;
 
 /**
@@ -108,14 +109,14 @@ public class Database {
       int maxResponses = Integer.parseInt(queryParams.get("limit")[0]);
       filteredTodos = limitTodos(filteredTodos, maxResponses);
     }
-/*
-    // Return Todos alphabetically
-    if (queryParams.containsKey("orderBy"))
+
+    // Sort results alphabetically
+    if(queryParams.containsKey("orderBy"))
     {
-      String targetOrderBy = (queryParams.get("orderBy")[0]);
-      filteredTodos = filteredTodosByOrder(filteredTodos, targetOrderBy);
+      String sortBy = queryParams.get("orderBy")[0];
+      filteredTodos = filteredTodosByOrder(filteredTodos, sortBy);
     }
-    */
+
     return filteredTodos;
   }
   /**
@@ -145,15 +146,23 @@ public class Database {
   public Todo[] filteredTodosByCategory(Todo[] todos, String targetCategory){
     return Arrays.stream(todos).filter(x -> x.category.equals(targetCategory)).toArray(Todo[]::new);
   }
-  /*
-  public Todo[] filteredTodosByOrder(Todo[] todos, String targetOrderBy){
-    switch (targetOrderBy){
-      case "boolean":
-        todos = Arrays.stream(todos).filter(x -> x.status).toArray(Todo[]::new);
-        break;
+
+  public Todo[] filteredTodosByOrder(Todo[] todos, String sortBy)
+  {
+    switch(sortBy)
+    {
+      case "status":
+        return Arrays.stream(todos).sorted((o1, o2) -> o1.status.compareTo(o2.status)).toArray(Todo[]::new);
+      case "owner":
+        return Arrays.stream(todos).sorted((o1, o2) -> o1.owner.compareTo(o2.owner)).toArray(Todo[]::new);
+      case "category":
+        return Arrays.stream(todos).sorted((o1, o2) -> o1.category.compareTo(o2.category)).toArray(Todo[]::new);
+      case "body":
+        return Arrays.stream(todos).sorted((o1, o2) -> o1.body.compareTo(o2.body)).toArray(Todo[]::new);
     }
+
+    return null;
   }
-  */
   public Todo[] limitTodos(Todo[] todos, int maxResponses)
   {
     if(todos.length > maxResponses)
