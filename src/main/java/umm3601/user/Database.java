@@ -74,13 +74,20 @@ public class Database {
       filteredTodos = filterTodosByID(filteredTodos, targetID);
     }
 
+    //Return Todos with specific owner
+    if (queryParams.containsKey("owner")){
+      String targetOwner = (queryParams.get("owner")[0]);
+      //Need to add capitalization fix
+      //targetOwner.charAt(0);
+      filteredTodos = filterTodosByOwner(filteredTodos, targetOwner);
+    }
+
     // Apply a limit to the number of responses to the search
     if(queryParams.containsKey("limit"))
     {
       int maxResponses = Integer.parseInt(queryParams.get("limit")[0]);
       filteredTodos = limitTodos(filteredTodos, maxResponses);
     }
-
     return filteredTodos;
   }
   /**
@@ -98,8 +105,10 @@ public class Database {
   public Todo[] filterTodosByID(Todo[] todos, String targetID){
     return Arrays.stream(todos).filter(x -> x._id == targetID).toArray(Todo[]::new);
   }
+  public Todo[] filterTodosByOwner(Todo[] todos, String targetOwner){
+    return Arrays.stream(todos).filter(x -> x.owner.equals(targetOwner)).toArray(Todo[]::new);
+  }
 
-  //WIP
   public Todo[] limitTodos(Todo[] todos, int maxResponses)
   {
     if(todos.length > maxResponses)
