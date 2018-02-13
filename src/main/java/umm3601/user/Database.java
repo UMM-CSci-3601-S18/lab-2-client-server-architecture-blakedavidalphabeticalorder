@@ -96,6 +96,12 @@ public class Database {
       filteredTodos = filteredTodosByBody(filteredTodos, targetBody);
     }
 
+    //Return Todos by category
+    if (queryParams.containsKey("category")){
+      String targetCategory = (queryParams.get("category")[0]);
+      filteredTodos = filteredTodosByCategory(filteredTodos, targetCategory);
+    }
+
     // Apply a limit to the number of responses to the search
     if(queryParams.containsKey("limit"))
     {
@@ -128,7 +134,9 @@ public class Database {
   public Todo[] filteredTodosByBody(Todo[] todos, String targetBody){
     return Arrays.stream(todos).filter(x -> x.body.contains(targetBody)).toArray(Todo[]::new);
   }
-
+  public Todo[] filteredTodosByCategory(Todo[] todos, String targetCategory){
+    return Arrays.stream(todos).filter(x -> x.category.equals(targetCategory)).toArray(Todo[]::new);
+  }
   public Todo[] limitTodos(Todo[] todos, int maxResponses)
   {
     if(todos.length > maxResponses)
