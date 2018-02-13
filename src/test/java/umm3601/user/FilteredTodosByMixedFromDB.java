@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 import static junit.framework.TestCase.assertEquals;
 
-public class FliterTodosByOrderFromDB
+public class FilteredTodosByMixedFromDB
 {
   @Test
   public void filterTodosByMix() throws IOException {
