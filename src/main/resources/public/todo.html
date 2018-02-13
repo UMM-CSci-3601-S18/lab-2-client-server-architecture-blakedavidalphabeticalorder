@@ -18,6 +18,9 @@ id: <input id="_id" type= "text" name="_id">
 
 contains: <input id="contains" type= "text" name="contains">
 <button type="button" id="getTodosByContains"> get todos by contains </button>
+
+owner: <input id="owner" type= "text" name="owner">
+<button type="button" id="getTodosByOwner"> get todos by owner </button>
 <script>
   window.onload = function() {
     console.log("The page is loaded now!");
@@ -30,6 +33,9 @@ contains: <input id="contains" type= "text" name="contains">
 
     element = document.getElementById('getTodosByContains');
     element.addEventListener("click", getAllTodosByContains, true);
+
+    element = document.getElementById('getTodosByOwner');
+    element.addEventListener("click", getAllTodosByOwner, true);
   }
 </script>
 </body>

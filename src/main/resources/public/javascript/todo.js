@@ -31,6 +31,15 @@ function getAllTodosByContains() {
     document.getElementById('jsonDump').innerHTML = returned_json;
   });
 }
+
+function getAllTodosByOwner() {
+  console.log("Getting all the todos.");
+
+  var HttpThingy = new HttpClient();
+  HttpThingy.get("/api/todos?owner=" +  document.getElementById("owner").value, function(returned_json){
+    document.getElementById('jsonDump').innerHTML = returned_json;
+  });
+}
 /**
  * Wrapper to make generating http requests easier. Should maybe be moved
  * somewhere else in the future!.
