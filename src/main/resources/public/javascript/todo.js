@@ -67,6 +67,15 @@ function getAllTodosByLimit() {
     document.getElementById('jsonDump').innerHTML = returned_json;
   });
 }
+
+function getAllTodosByOrderBy() {
+  console.log("Getting all the todos.");
+
+  var HttpThingy = new HttpClient();
+  HttpThingy.get("/api/todos?orderBy=" +  document.getElementById("orderBy").value, function(returned_json){
+    document.getElementById('jsonDump').innerHTML = returned_json;
+  });
+}
 /**
  * Wrapper to make generating http requests easier. Should maybe be moved
  * somewhere else in the future!.

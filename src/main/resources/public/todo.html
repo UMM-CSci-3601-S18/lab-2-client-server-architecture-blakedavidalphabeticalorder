@@ -30,6 +30,9 @@ status: <input id="status" type= "text" name="status">
 
 limit: <input id="limit" type= "text" name="limit">
 <button type="button" id="getTodosByLimit"> set limit of todos </button>
+
+orderBy: <input id="orderBy" type= "text" name="orderBy">
+<button type="button" id="getTodosByOrderBy"> set field to orderBy </button>
 <script>
   window.onload = function() {
     console.log("The page is loaded now!");
@@ -54,6 +57,9 @@ limit: <input id="limit" type= "text" name="limit">
 
     element = document.getElementById('getTodosByLimit');
     element.addEventListener("click", getAllTodosByLimit, true);
+
+    element = document.getElementById('getTodosByOrderBy');
+    element.addEventListener("click", getAllTodosByOrderBy, true);
   }
 </script>
 </body>
